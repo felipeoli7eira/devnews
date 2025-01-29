@@ -1,0 +1,43 @@
+version: '3'
+
+vars:
+  CONTAINER_NAME: 'devnews'
+
+tasks:
+  setup:
+    cmds:
+      - docker compose up -d --build
+      - docker exec -it {{.CONTAINER_NAME}} composer install
+      - docker exec -it {{.CONTAINER_NAME}} cp .env.example .env
+      - docker exec -it {{.CONTAINER_NAME}} chmod -R 777 .
+      - docker exec -it {{.CONTAINER_NAME}} php artisan key:generate
+    desc: "Setup environment"
+  down:
+    cmds:
+      - docker compose down
+    desc: "Shutdown environment"
+  up:
+    cmds:
+      - docker compose up -d
+    desc: "Start environment"
+  up_with_build:
+    cmds:
+      - docker compose up -d --build
+    desc: "Start environment with build"
+  migrate_reset:
+    cmds:
+      - docker exec -it {{.CONTAINER_NAME}} php artisan migrate:reset
+    desc: "Reset migrations"
+  migrate_up:
+    cmds:
+      - docker exec -it {{.CONTAINER_NAME}} php artisan migrate
+    desc: "Run migrations"
+  migrate_seed:
+    cmds:
+      - docker exec -it {{.CONTAINER_NAME}} php artisan migrate --seed
+    desc: "Run migrations with seeders"
+  db_wipe:
+    cmds:
+      - docker exec -it {{.CONTAINER_NAME}} php artisan db:wipe
+    desc: "Wipe database"
+silent: true
