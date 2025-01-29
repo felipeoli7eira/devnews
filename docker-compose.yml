@@ -26,6 +26,14 @@ services:
       - devnews_db_volume:/var/lib/mysql
     networks:
       - devnews_network
+  redis:
+    image: redis:alpine
+    container_name: "devnews-redis"
+    command: redis-server --requirepass root
+    ports:
+      - "6379:6379"
+    networks:
+      - devnews_network
 
 networks:
   devnews_network:
