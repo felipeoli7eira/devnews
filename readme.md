@@ -39,4 +39,4 @@ O tempo de expliração desses dados em memória é de 60 segundos, apenas como 
 
 Como o foco aqui é trabalhar com o redis, não me dei o trabalho de estilizar de maneira mais atraente a aplicação, mas sim focar na integração com o banco de dados.
 
-<img src="https://prnt.sc/kEAtdfpCtE-0" alt="preview" />
+[previw](https://prnt.sc/kEAtdfpCtE-0)
